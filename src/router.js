@@ -10,10 +10,12 @@ export default new Router({
     { // 一级路由
       path: '/',
       redirect: '/home'
-    }, {
+    },
+    {
       path: '/home',
       component: Home
-    }, {
+    },
+    {
       path: '/login',
       component: Login
     }
