@@ -57,10 +57,22 @@ export default {
   },
   methods: {
     login () {
-      // 校验整个表单的规则
-      this.$refs.myForm.validate(function (isOK) {
+      // 校验表单
+      this.$refs.myForm.validate((isOK) => {
         if (isOK) {
-          console.log('校验成功')
+          this.$axios({
+            method: 'POST',
+            url: '/authorizations',
+            data: this.loginForm
+          }).then(resule => {
+            window.localStorage.setItem('user-token', resule.data.data.token)
+            this.$router.push('/')
+          }).catch(() => {
+            this.$message({
+              message: '手机号或者验证码错误',
+              type: 'warning'
+            })
+          })
         }
       })
     }
