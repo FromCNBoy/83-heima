@@ -1,14 +1,14 @@
 <template>
-  <el-row class='layout-header' type='flex' align="middle" justify="space-between">
+  <el-row class="layout-header" type="flex" align="middle" justify="space-between">
     <el-col :span="6">
       <i class="el-icon-s-unfold"></i>
       <span class="title">江苏传智播客教育科技股份有限公司</span>
     </el-col>
     <el-col :span="4">
-      <img class="head-img" src="../../assets/img/file-1567005333695.jpg" alt />
+      <img class="head-img" :src="! userInfo.photo ? userInfo.photo : defaultImg" alt />
       <el-dropdown trigger="click">
         <span class="el-dropdown-link">
-          哈哈哈哈
+          {{userInfo.name}}
           <i class="el-icon-arrow-down el-icon--right"></i>
         </span>
         <el-dropdown-menu slot="dropdown">
@@ -22,7 +22,28 @@
 </template>
 
 <script>
-export default {}
+export default {
+  data () {
+    return {
+      userInfo: {},
+      defaultImg: require('../../assets/img/avatar.jpg')
+    }
+  },
+  methods: {
+    getUserrInfo () {
+      let token = window.localStorage.getItem('user-token')
+      this.$axios({
+        url: '/user/profile',
+        headers: { Authorization: `Bearer ${token}` }
+      }).then(result => {
+        this.userInfo = result.data.data
+      })
+    }
+  },
+  created () {
+    this.getUserrInfo()
+  }
+}
 </script>
 
 <style lang="less" scoped>
