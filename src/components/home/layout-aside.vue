@@ -47,7 +47,7 @@ export default {}
 
 <style lang="less" scoped>
 .layout-aside {
-  background-color: #323745;
+  // background-color: #323745;
   width: 200px;
   height: 100vh;
   .title {
