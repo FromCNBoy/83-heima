@@ -5,7 +5,7 @@
       <span class="title">江苏传智播客教育科技股份有限公司</span>
     </el-col>
     <el-col :span="4">
-      <img class="head-img" :src="! userInfo.photo ? userInfo.photo : defaultImg" alt />
+      <img class="head-img" :src="userInfo.photo ? userInfo.photo : defaultImg" alt />
       <el-dropdown trigger="click" @command="commonClick">
         <span class="el-dropdown-link">
           {{userInfo.name}}
