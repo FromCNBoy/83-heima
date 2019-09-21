@@ -65,7 +65,10 @@ export default {
             url: '/authorizations',
             data: this.loginForm
           }).then(resule => {
-            window.localStorage.setItem('user-token', resule.data.data.token)
+            // 将后台返回的token令牌存储到前端缓存中
+            // window.localStorage.setItem('user-token', resule.data.data.token)
+            // eslint-disable-next-line no-undef
+            window.localStorage.setItem('user-token', result.data.token)
             this.$router.push('/')
           }).catch(() => {
             this.$message({
