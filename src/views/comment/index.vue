@@ -19,7 +19,7 @@
       <el-table-column align="center" label="操作">
         <template slot-scope="obj">
           <el-button size="small" type="text">修改</el-button>
-          <el-button @click="closeOrOpen(obj.row)" size="small" type="text">
+          <el-button :style="{color: obj.row.comment_status ? '#E6A23C' : '#409EFF' }" @click="closeOrOpen(obj.row)" size="small" type="text">
             {{
             obj.row.comment_status ? "关闭评论" : '打开评论'
             }}
@@ -52,13 +52,13 @@ export default {
     },
     // 打开或者关闭  row 当前行数据
     closeOrOpen (row) {
-      let mess = row.comment_status ? '关闭' : '打开' // 得到打开或者关闭
+      let mess = row.comment_status ? '关闭' : '打开'
       this.$confirm(`您确定要${mess}评论?`).then(() => {
-        // 确定调用接口
+        // 调用接口
         this.$axios({
-          url: 'comments/status', // 地址
+          url: 'comments/status',
           method: 'put',
-          params: { article_id: row.id }, // 路径参数
+          params: { article_id: row.id.toString() }, // 路径参数
           data: { allow_comment: !row.comment_status } // body参数  调用状态和当前状态是反着的 所以取反
         }).then(() => {
           // 成功之后一定会进入then
