@@ -7,7 +7,7 @@ import router from '../permission' // 导入一个实例
 axios.defaults.baseURL = 'http://ttapi.research.itcast.cn/mp/v1_0'
 // 转化方法
 axios.defaults.transformResponse = [function (data) {
-  return jsonBig.parse(data) // 计算更精确 保证id不失真
+  return data ? jsonBig.parse(data) : {} // 计算更精确 保证id不失真
 }]
 // 请求拦截  请求到达后台之前拦截
 axios.interceptors.request.use(function (config) {

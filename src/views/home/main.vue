@@ -8,8 +8,8 @@ export default {}
 
 <style scoped>
 .home {
-  background-image: url("../../assets/img/huli.jpg");
+  background: url("../../assets/img/404.png") no-repeat;
   height: 100vh;
-  background-size: coveer;
+  background-size: cover;
 }
 </style>
