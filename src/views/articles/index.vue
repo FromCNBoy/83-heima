@@ -45,10 +45,10 @@
       </div>
       <!-- 右侧 -->
       <div class="right">
-        <span>
+        <span @click="goEdit(item.id)">
           <i class="el-icon-edit"></i>修改
         </span>
-        <span>
+        <span @click="delArticles(item.id)">
           <i class="el-icon-delete"></i>删除
         </span>
       </div>
@@ -87,6 +87,21 @@ export default {
     }
   },
   methods: {
+    //  跳转到修改
+    goEdit (id) {
+      this.$router.push(`/home/publish/${id.toString()}`)
+    },
+    // 删除文章
+    delArticles (id) {
+      this.$confirm('你确定要删除该文章吗？').then(() => {
+        this.$axios({
+          url: `/articles/${id.toString()}`,
+          method: 'delete'
+        }).then(() => {
+          this.qureyArticles()
+        })
+      })
+    },
     changeCondition () {
       this.page.currentPage = 1
       this.qureyArticles()
@@ -206,6 +221,7 @@ export default {
     font-size: 12px;
     span {
       margin-right: 8px;
+      cursor: pointer;
     }
   }
 }
