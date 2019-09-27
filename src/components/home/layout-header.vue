@@ -22,6 +22,7 @@
 </template>
 
 <script>
+import eventBus from '../../utils/eventBus'
 export default {
   data () {
     return {
@@ -30,7 +31,7 @@ export default {
     }
   },
   methods: {
-    getUserrInfo () {
+    getUserInfo () {
       this.$axios({
         url: '/user/profile' }).then(result => {
         // this.userInfo = result.data.data
@@ -49,7 +50,11 @@ export default {
     }
   },
   created () {
-    this.getUserrInfo()
+    this.getUserInfo()
+    // 一旦监听到事件 就会执行后面的函数
+    eventBus.$on('updateUserInfo', () => {
+      this.getUserInfo()
+    })
   }
 }
 </script>

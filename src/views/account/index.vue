@@ -34,6 +34,8 @@
 </template>
 
 <script>
+import eventBus from '../../utils/eventBus' // 实际上Vue实例
+
 export default {
   data () {
     return {
@@ -65,6 +67,7 @@ export default {
         method: 'patch',
         data
       }).then(result => {
+        eventBus.$emit('updateUserInfo') // 抛出一个事件
         this.formData.photo = result.data.photo // 成功上传的头像更新给当前的页面数据
         this.loading = false
       })
@@ -79,6 +82,9 @@ export default {
             method: 'patch',
             data: this.formData
           }).then(() => {
+            // 提示别的组件 要更新数据
+            eventBus.$emit('updateUserInfo') // 抛出一个事件
+
             // 成功了 提示消息
             this.$message({ message: '保存成功', type: 'success' })
           })

@@ -1,5 +1,5 @@
 <template>
-  <div class="home"></div>
+  <div class="notfound"></div>
 </template>
 
 <script>
@@ -7,8 +7,8 @@ export default {}
 </script>
 
 <style scoped>
-.home {
-  background: url("../../assets/img/maomi.jpg") no-repeat;
+.notfound {
+  background-image: url("../assets/img/404.png");
   height: 100vh;
   background-size: cover;
 }
